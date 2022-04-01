@@ -1,19 +1,18 @@
-use std::io;
 fn main() {
-    println!("Enter weight (kg): ");
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
-
-    let weight: f32 = input.trim().parse().unwrap();
-    dbg!(weight);
-
-    println!("Input: {}", input);
-    let m_weight = weight_on_mars(weight);
-    println!("Weight on Mars: {}kg ", m_weight);
-
-    weight_on_mars(100.0);
+    let server = Server::new("127.0.0.1:8080".to_string());
+    server.run();
 }
 
-fn weight_on_mars(weight: f32) -> f32 {
-    (weight / 9.81) * 3.711
+struct Server {
+    addr: String,
+}
+
+impl Server {
+    fn new(addr: String) -> Self {
+        Self { addr }
+    }
+
+    fn run(self) {
+        println!("Listening on {}", self.addr);
+    }
 }
